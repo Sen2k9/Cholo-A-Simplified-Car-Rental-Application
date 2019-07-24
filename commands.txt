@@ -1,0 +1,41 @@
+﻿Python3 manage.py runserver
+
+python3 manage.py startproject project_name
+
+ python3 manage.py startapp uber
+
+python3 manage.py makemigrations uber
+
+python3 manage.py migrate
+
+python3 manage.py shell
+
+python3 manage.py createsuperuser
+
+Features:
+Creat a User profile through Signup(signup_page.jpg)
+Redirect to Index Page/index page of all available vehicle(index_page.jpg)
+
+index page of all available drivers(driver_index.jpg)
+details of every vehicle (vehicle_details.jpg)
+details of every driver for each vehicle (driver_details.jpg)
+Search with Keyword (e.g. Toyota, Camry, M, etc.)(search_page.jpg)
+Add/Update a vehicle (add_vehicle.jpg)
+Add/Update a driver (add_driver.jpg)
+Create and complete a ride (ride_details.jpg)
+Every ride details (ride_details2.jpg)
+
+Profile page (profile_page.jpg)
+Edit User Profile (edit_profile.jpg)
+All taken ride by the current User (all_rides.jpg)
+
+
+Login page (login_page.jpg)
+Password reset (password_reset.jpg)
+Password reset link sent to email (password_reset2.jpg)
+Setting new password/Reset Password through email link (password_reset3.jpg)
+Reset Complete (password_reset_complete.jpg)
+Restrict user without login
+Reset Password through email link 
+
+

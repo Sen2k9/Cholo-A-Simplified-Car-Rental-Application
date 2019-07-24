@@ -1,0 +1,80 @@
+{% extends 'uber/base.html' %}
+{% block vehicles_active %}active{% endblock %}
+
+{% block body %}
+<div class="vehicles-container container-fluid">
+
+    <!-- vehicles -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>{{ user.username }}'s Search Results</h3>
+        </div>
+        {% if vehicles %}
+        <div class="col-sm-12">
+            <h4> Results Related to Vehicles </h4>
+        </div>
+        
+            {% for vehicle in vehicles %}
+                <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
+                        <a href="{% url 'uber:detail' vehicle.ID %}">
+                            <img src="{{ vehicle.vehicle_image.url }}" class="img-fluid" class="img-responsive" style=" height: 100px;">
+                        </a>
+                        <div class="caption">
+                            <h2>{{ vehicle.vehicle_make }}</h2>
+                            <h4>{{ vehicle.vehicle_model}}</h4>
+
+                            <!-- View Details -->
+                            <a href="{% url 'uber:detail' vehicle.ID%}" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+
+        {% endif %}
+    </div>
+
+   
+    {% if drivers %}
+    <div class="col-sm-12">
+        <h4> Results Related to Driver </h4>
+    </div>
+
+            {% for driver in drivers %}
+                <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
+                        <a href="">
+                            <img src="{{ driver.driver_image.url }}" class="img-fluid" class="img-responsive" style=" height: 100px;">
+                        </a>
+                        <div class="caption">
+                            <h3>{{ driver.first_name }}</h3>
+                            <h3>{{driver.last_name}}</h3>
+                            <h4>Sex: {{ driver.sex}}</h4>
+                            <h4>                               
+                            <a href="{% url 'uber:favourite' driver.ssn %}" class="btn-favorite">
+                            <span class="glyphicon glyphicon-star {% if driver.is_favorite %}active{% endif %}"></span></a>
+                            </h4> 
+
+
+                            
+                            <a href="{% url 'uber:all_driver' driver.ssn %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+
+        {% endif %}
+
+</div>
+{% endblock %}

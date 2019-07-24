@@ -1,0 +1,60 @@
+{% extends 'uber/base.html' %}
+{% block drivers_active %}active{% endblock %}
+
+{% block body %}
+<div class="drivers-container container-fluid">
+
+    <!-- drivers -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h3> Available drivers Now </h3>
+        </div>
+        {% if drivers %}
+            {% for driver in drivers %}
+                <div class="col-sm-4 col-lg-2">
+                    <div  class="thumbnail" >
+                        <a href="{% url 'uber:all_driver' driver.ssn %}">
+                            <img src="{{ driver.driver_image.url }}" class="img-fluid" class="img-responsive" style=" height: 100px;" >
+                        </a>
+                        <div class="caption">
+                            <h4>{{ driver.first_name }}</h4>
+                            <h4>{{ driver.last_name}}</h4>
+
+                            <!-- View Details -->
+                            <a href="{% url 'uber:all_driver' driver.ssn%}" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+                            <!-- Delete driver -->
+                            <form action="{% url 'uber:delete_driver' driver.ssn %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="driver_ssn" value="{{ driver.ssn }}" />
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
+
+                            <!-- Favorite driver -->
+                             <a href="{% url 'uber:favourite' driver.ssn %}" class="btn-favorite">
+                    <span class="glyphicon glyphicon-star {% if driver.is_favorite %}active{% endif %}"></span></a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+        {% else %}
+            <div class="col-sm-12">
+                <br>
+                <a href="{% url 'uber:create_driver' %}">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Add an driver
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+   
+</div>
+{% endblock %}

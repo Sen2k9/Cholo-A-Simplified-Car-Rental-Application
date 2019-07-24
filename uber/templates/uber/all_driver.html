@@ -1,0 +1,45 @@
+{% extends 'uber/base.html' %}
+{% block title %}{{ driver }}{% endblock %}
+{% block drivers_active %}active{% endblock %}
+
+{% block body %}
+
+
+<div class="container-fluid drivers-container">
+
+    <div class="row">
+
+        <!-- Left vehicle Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                
+                    <a href="">
+                        {% if driver.driver_image %}
+                            <img src="{{ driver.driver_image.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h4>{{ driver.first_name }}</h4>
+                    <h4>{{ driver.last_name}} </h4>
+                    <h4>Sex: {{ driver.sex}}</h4>
+                    <h4><i class="glyphicon glyphicon-gift"></i>{{ driver.birth_day}}</h4>
+                     <h4>                               
+                    <a href="{% url 'uber:favourite' driver.ssn %}" class="btn-favorite">
+                    <span class="glyphicon glyphicon-star {% if driver.is_favorite %}active{% endif %}"></span></a>
+                    </h4>
+                    <h4>
+                    <button type="button" class="btn btn-secondary btn-lg">
+                    <a href="{% url 'uber:update_driver' driver.ssn %}">Update Information</a></button>
+
+                    </h4> 
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

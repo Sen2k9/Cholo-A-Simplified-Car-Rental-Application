@@ -1,0 +1,108 @@
+{% extends 'uber/base.html' %}
+{% block vehicles_active %}active{% endblock %}
+
+{% block body %}
+<div class="vehicles-container container-fluid">
+
+    <!-- vehicles -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h3> Available Vehicles Now (Choose Your Ride)</h3>
+        </div>
+        {% if vehicles %}
+            {% for vehicle in vehicles %}
+                <div class="col-sm-4 col-lg-2">
+                    <div  class="thumbnail" >
+                        <a href="{% url 'uber:detail' vehicle.ID %}">
+                            <img src="{{ vehicle.vehicle_image.url }}" class="img-fluid" class="img-responsive" style=" height: 100px;" >
+                        </a>
+                        <div class="caption">
+                            <h2>{{ vehicle.vehicle_make }}</h2>
+                            <h4>{{ vehicle.vehicle_model}}</h4>
+
+                            <!-- View Details -->
+                            <a href="{% url 'uber:detail' vehicle.ID%}" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+                            <!-- Delete vehicle -->
+                            <form action="{% url 'uber:delete_vehicle' vehicle.ID %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="vehicle_id" value="{{ vehicle.ID }}" />
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
+
+                            <!-- Favorite Vehicle -->
+                            <a href="{% url 'uber:favourite_vehicle' vehicle.ID %}" class="btn btn-default btn-sm btn-favorite" role="button">
+                                <span class="glyphicon glyphicon-star {% if vehicle.is_favourite %}active{% endif %}"></span>
+                            </a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+        {% else %}
+            <div class="col-sm-12">
+                <br>
+                <a href="{% url 'uber:create_vehicle' %}">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Add an vehicle
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- If user searches and there are drivers -->
+    {% if drivers %}
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>drivers</h3>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>driver Title</th>
+                                    <th>Artist</th>
+                                    <th>Audio File</th>
+                                    <th>vehicle</th>
+                                    <th>Favorite</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for driver in drivers %}
+                                    <tr>
+                                        <td>{{ driver.first_name }}</td>
+                                        <td>{{ driver.last_name }}</td>
+                                        <td>
+                                            <a target="_blank" href="{{ driver.driver_image.url }}">
+                                                <button type="button" class="btn btn-success btn-xs">
+                                                    <span class="glyphicon glyphicon-play"></span>&nbsp; Play
+                                                </button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'uber:detail' driver.vehicle.id %}">
+                                                <img src="{{ driver.vehicle.vehicle_image.url }}" class="img-responsive" style="width: 20px; float: left; margin-right: 10px;" />
+                                            </a>
+                                            <a href="{% url 'uber:detail' driver.vehicle.id %}">{{ driver.vehicle.vehicle_model }}</a>
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

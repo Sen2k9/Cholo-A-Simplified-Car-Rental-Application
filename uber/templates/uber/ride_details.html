@@ -1,0 +1,175 @@
+{% extends 'uber/base.html' %}
+{% block title %}{{ vehicle }}{% endblock %}
+{% block vehicles_active %}active{% endblock %}
+
+{% block body %}
+
+
+<div class="container-fluid drivers-container">
+
+    <div class="row">
+
+        <!-- Left vehicle Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="">
+                        {% if vehicle.vehicle_image %}
+                            <img src="{{ vehicle.vehicle_image.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1>{{ vehicle.vehicle_type }}</h1>
+                    <h2>{{ vehicle.vehicle_make}} <small>{{ vehicle.vehicle_model}}</small></h2>
+                    <h4>Passenger Capacity :{{ vehicle.passenger_capacity}}</h4>
+                    <h4>Luggage Capacity :{{ vehicle.luggage_capacity}}</h4>
+                    <h4>
+
+                    <!-- Favorite Vehicle -->
+                    <a href="{% url 'uber:favourite_vehicle' vehicle.ID %}" class="btn btn-default btn-sm btn-favorite" role="button">
+                        <span class="glyphicon glyphicon-star {% if vehicle.is_favourite %}active{% endif %}"></span>
+                    </a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-8 col-md-9">
+
+           
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>Driver Information</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Photo</th>
+                            <th>Sex</th>
+                            <th>Favourite</th>
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                            <tr>
+                                <td>{{ driver.first_name }}</td>
+                                                                <td>
+                                {{ driver.last_name}}
+                                </td>
+                                <td>
+                                    <a target="_blank" href="{{ driver.driver_image.url }}">
+                                        <button type="button" class="btn btn-success btn-xs">
+                                            <span class="glyphicon glyphicon-play"></span>&nbsp; Show
+                                        </button>
+                                    </a>
+                                </td>
+
+                                <td>{{ driver.sex }}
+                                </td>
+                                
+                                <td>
+                                    <a href="{% url 'uber:favourite' driver.ssn %}" class="btn-favorite">
+                                    <span class="glyphicon glyphicon-star {% if driver.is_favorite %}active{% endif %}"></span></a>
+                                </td>
+                                <td>
+                                 <a href="{% url 'uber:all_driver' driver.ssn %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+                                </td>
+
+
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+        <div class="col-sm-8 col-md-9">
+
+           
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>Ride Information</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Starting Location</th>
+                            <th>Destination</th>
+                            <th>Start Time</th>
+                            <th>Stop Time</th>
+                            <th>Fare(USD)</th>
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {{ starting_location }}
+
+                                
+                                </td>
+                             
+                                <td>
+                                
+                                    {{ destination}}
+
+                            
+                                </td>
+                                <td>
+
+                                    {{ starting_time}}
+
+                                
+                                </td>
+
+                                <td>
+                                {{ ending_time }}
+                              
+                                </td>
+                                
+                                <td>
+                                {{ fare }}
+                                </td>
+                               
+
+
+                            </tr>
+
+                        
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+    </div>
+
+
+</div>
+
+
+   
+
+{% endblock %}

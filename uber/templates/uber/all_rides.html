@@ -1,0 +1,105 @@
+{% extends 'uber/base.html' %}
+
+
+{% block body %}
+
+
+<div class="container-fluid drivers-container">
+
+    <div class="row">
+
+<div class="col-sm-8 col-md-9">
+
+           
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>Ride Information</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Starting Location</th>
+                            <th>Destination</th>
+                            <th>Start Time</th>
+                            <th>Stop Time</th>
+                            <th>Fare(USD)</th>
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        
+                        
+                        
+                        {% for ride1 in rides %}
+                   
+
+
+
+
+                        
+                        
+                            <tr>
+                                <td>
+                        
+                                    {{ ride1.starting_location}}
+
+        
+                                </td>
+                                <td>
+                            
+                                    {{ ride1.destination}}
+
+    
+                                </td>
+                                <td>
+                        
+                                    {{ ride1.starting_time}}
+
+    
+                                </td>
+
+                                <td>
+                            
+                                    {{ ride1.ending_time}}
+
+    
+                                </td>
+                                
+                                <td>
+                    
+                                    {{ ride1.fare}}
+
+        
+                                </td>
+                               
+
+
+                            </tr>
+
+
+                        {% endfor %}
+                        
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+
+
+    </div>
+
+
+</div>
+
+
+   
+
+{% endblock %}

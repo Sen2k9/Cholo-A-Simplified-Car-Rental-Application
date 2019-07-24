@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Cholo{% endblock %}</title>
+    {% load staticfiles %}
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'uber/style.css' %}"/>
+  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    
+    
+   
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+    
+ 
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'uber:index' %}">Cholo</a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+
+                <li class="{% block vehicles_active %}{% endblock %}"><a href="{% url 'uber:index' %}"><span class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp; vehicles</a></li>
+                
+               
+                
+                    
+            </ul>
+            <ul class="nav navbar-nav">
+
+                <li ><a href="{% url 'uber:driver_index' %}"><span class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp; drivers</a></li>
+                    
+            </ul>
+
+            <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'uber:search' %}">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+
+
+                <div>
+                
+    
+                {% if user.is_authenticated %}
+                <ul class="nav navbar-nav">
+                            
+                <li>
+                    <a href="{% url 'uber:create_vehicle' %}">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Your Vehicle
+                    </a>
+                </li>
+            
+                
+                 <li>
+                    <a href="{% url 'uber:create_driver'%}">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add As A Driver
+                    </a>
+                </li>
+                
+                <li>
+            
+                <li>
+                <a href="{% url 'view_profile' %}"><span class="glyphicon glyphicon-profile" aria-hidden="true"></span>&nbsp; Profile</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+            
+                <li>
+                <a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp; Log Out</a></li>
+                </ul>
+                {% else %}
+                <ul class="nav navbar-nav">
+                <li>
+                <a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; Log In</a></li>
+                </ul>
+                {% endif %}
+                {% if user.is_authenticated == False %}
+                <ul class="nav navbar-nav">
+                <li>
+                <a href="{% url 'signup' %}"><span class="glyphicon glyphicon-sign-up" aria-hidden="true"></span>&nbsp; Sign Up</a></li>
+                </ul>
+                {% endif %}
+
+                </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+{% block body %}
+{% endblock %}
+</body>
+</html>

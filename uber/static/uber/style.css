@@ -1,0 +1,22 @@
+body {
+    background: white url("images/background.png");
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-brand {
+    font-family: 'Satisfy', cursor;
+}
+
+.glyphicon {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+small {
+    display: block;
+    line-height: 1.428571429;
+    color: #999;
+}
