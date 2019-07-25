@@ -13,6 +13,10 @@ python3 manage.py shell
 
 python3 manage.py createsuperuser
 
+In command line: # to see the email send from django server
+python3 -m smtpd -n -c DebuggingServer localhost:1025
+
+
 Features:
 Creat a User profile through Signup(signup_page.jpg)
 Redirect to Index Page/index page of all available vehicle(index_page.jpg)
