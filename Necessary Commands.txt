@@ -1,8 +1,9 @@
-﻿Python3 manage.py runserver
+Commands:
+Python3 manage.py runserver
 
 python3 manage.py startproject project_name
 
- python3 manage.py startapp uber
+python3 manage.py startapp uber
 
 python3 manage.py makemigrations uber
 
@@ -36,6 +37,5 @@ Password reset link sent to email (password_reset2.jpg)
 Setting new password/Reset Password through email link (password_reset3.jpg)
 Reset Complete (password_reset_complete.jpg)
 Restrict user without login
-Reset Password through email link 
 
 
